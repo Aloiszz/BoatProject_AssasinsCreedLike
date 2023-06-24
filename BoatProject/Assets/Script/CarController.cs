@@ -11,7 +11,13 @@ public class CarController : MonoBehaviour
     public float linearDragDeceleration;
     public float linearDragMultiplier;
 
+    public GameObject rightTireRaycast;
+    public GameObject leftTireRaycast;
+    public bool rightTireOnGround;
+    public bool leftTireOnGround;
+
     private bool isMoving;
+    private float turnEffetor = 0;
 
     private void Start()
     {
@@ -21,23 +27,65 @@ public class CarController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
-        
+        if (leftTireRaycast && rightTireRaycast)
+        {
+            Move();
+        }
         rb.drag = linearDragDeceleration * linearDragMultiplier;
+    }
+    
+    void Update()
+    {
+        Ray rigthRay = new Ray(rightTireRaycast.transform.position, -transform.up);
+        RaycastHit hitDataRight;
+        if (Physics.Raycast(rigthRay, out hitDataRight, 1)) // right ray 
+        {
+            if (hitDataRight.collider.CompareTag("Ground"))
+            {
+                Debug.DrawRay(rightTireRaycast.transform.position, -transform.up, Color.green);
+                rightTireOnGround = true;
+            }
+            else
+            {
+                Debug.DrawRay(rightTireRaycast.transform.position, -transform.up, Color.red);
+                rightTireOnGround = false;
+            }
+        }
+        
+        Ray leftRay = new Ray(leftTireRaycast.transform.position, -transform.up);
+        RaycastHit hitDataLeft;
+        if (Physics.Raycast(leftRay, out hitDataLeft, 1)) // left ray 
+        {
+            if (hitDataLeft.collider.CompareTag("Ground"))
+            {
+                Debug.DrawRay(leftTireRaycast.transform.position, -transform.up, Color.green);
+                leftTireOnGround = true;
+            }
+            else
+            {
+                Debug.DrawRay(leftTireRaycast.transform.position, -transform.up, Color.red);
+                leftTireOnGround = false;
+            }
+        }
     }
 
     void Move()
     {
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
-        rb.AddForce(speed * move);
+        Vector3 move = new Vector3(0, 0, Input.GetAxis("Vertical")).normalized; 
         
-        Debug.Log(Input.GetAxis("Horizontal"));
-        
-        if (move != Vector3.zero)
+        rb.AddRelativeForce(speed * move);
+        Debug.Log((float)move.x + " " + (float)move.z);
+
+        if (rb.velocity.z > 1 || rb.velocity.z < -1)
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(move), timeToOrientate);
-            isMoving = true; 
+            turnEffetor = Input.GetAxis("Horizontal");
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(new Vector3(turnEffetor, 0,0)), timeToOrientate);
+            isMoving = true;
         }
-        else isMoving = false;
+        else
+        {
+            isMoving = false;
+            //turnEffetor = 0;
+        }
     }
 }

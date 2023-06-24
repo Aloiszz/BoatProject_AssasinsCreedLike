@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.00474974, g: 0.0044217785, b: 0.0024481644, a: 1}
+  m_IndirectSpecularColor: {r: 0.18120356, g: 0.2267985, b: 0.30733573, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -202,7 +202,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 63186525}
   m_LocalRotation: {x: 0.2064007, y: -0.018586552, z: 0.0079947375, w: 0.9782584}
-  m_LocalPosition: {x: 2.0211663, y: 7.7220473, z: -12.683971}
+  m_LocalPosition: {x: 2.0211663, y: 8.152047, z: -12.683971}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -629,7 +629,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 716489308}
   m_LocalRotation: {x: 0.2064007, y: -0.018586552, z: 0.0079947375, w: 0.9782584}
-  m_LocalPosition: {x: 2.0211663, y: 7.7220473, z: -12.683971}
+  m_LocalPosition: {x: 2.0211663, y: 8.152047, z: -12.683971}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -749,7 +749,7 @@ GameObject:
   - component: {fileID: 1060435046}
   m_Layer: 0
   m_Name: Road
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -843,18 +843,13 @@ PrefabInstance:
     - target: {fileID: 2680266041803910101, guid: a9ca2181a0b47d446bba71393945a4c0,
         type: 3}
       propertyPath: timeToOrientate
-      value: 0.05
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 3259730310124086142, guid: a9ca2181a0b47d446bba71393945a4c0,
         type: 3}
       propertyPath: m_Name
       value: Car
       objectReference: {fileID: 0}
-    - target: {fileID: 5706027685981531720, guid: a9ca2181a0b47d446bba71393945a4c0,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 4e01cfc1561b6214bbf59cee85495330, type: 2}
     - target: {fileID: 7023360386840822801, guid: a9ca2181a0b47d446bba71393945a4c0,
         type: 3}
       propertyPath: m_RootOrder
@@ -868,7 +863,7 @@ PrefabInstance:
     - target: {fileID: 7023360386840822801, guid: a9ca2181a0b47d446bba71393945a4c0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.03
+      value: 0.46
       objectReference: {fileID: 0}
     - target: {fileID: 7023360386840822801, guid: a9ca2181a0b47d446bba71393945a4c0,
         type: 3}
@@ -999,14 +994,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1254901266}
-  m_LocalRotation: {x: -0.4187675, y: -0.71419525, z: 0.14396927, w: 0.5420626}
+  m_LocalRotation: {x: 0.04329512, y: -0.8267808, z: 0.41847533, w: 0.37341335}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -14.38, y: -112.512, z: 51.136}
+  m_LocalEulerAnglesHint: {x: 46.411, y: -122.542, z: 20.454}
 --- !u!114 &1254901269
 MonoBehaviour:
   m_ObjectHideFlags: 0
