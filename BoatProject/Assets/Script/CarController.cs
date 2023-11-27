@@ -7,7 +7,8 @@ public class CarController : MonoBehaviour
 {
     private Rigidbody rb;
     [SerializeField] private float speed = 6;
-    [SerializeField] private float timeToOrientate = 1.2f;
+    [SerializeField] private float superSpeed = 15;
+    [SerializeField] private float angleToOriantation = 45;
     public float linearDragDeceleration;
     public float linearDragMultiplier;
 
@@ -30,6 +31,7 @@ public class CarController : MonoBehaviour
         if (leftTireRaycast && rightTireRaycast)
         {
             Move();
+            Drift();
         }
         rb.drag = linearDragDeceleration * linearDragMultiplier;
     }
@@ -71,21 +73,44 @@ public class CarController : MonoBehaviour
 
     void Move()
     {
-        Vector3 move = new Vector3(0, 0, Input.GetAxis("Vertical")).normalized; 
+        //transform.Translate(Vector3.forward * Time.deltaTime * speed * Input.GetAxis("Vertical"));
         
+        Vector3 move = new Vector3(0, 0, Input.GetAxis("Vertical")).normalized; 
         rb.AddRelativeForce(speed * move);
-        Debug.Log((float)move.x + " " + (float)move.z);
-
+        
         if (rb.velocity.z > 1 || rb.velocity.z < -1)
         {
-            turnEffetor = Input.GetAxis("Horizontal");
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(new Vector3(turnEffetor, 0,0)), timeToOrientate);
-            isMoving = true;
-        }
-        else
+            transform.Rotate(Vector3.up, angleToOriantation * Input.GetAxis("Horizontal") * Time.deltaTime);
+        }  
+
+            /*Vector3 move = new Vector3(0, 0, Input.GetAxis("Vertical")).normalized; 
+            rb.AddRelativeForce(speed * move);
+            Debug.Log((float)move.x + " " + (float)move.z);
+            if (rb.velocity.z > 1 || rb.velocity.z < -1)
+            {
+                transform.Rotate(Vector3.up, angleToOriantation * Input.GetAxis("Horizontal") * Time.deltaTime);
+                turnEffetor = Input.GetAxis("Horizontal");
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(new Vector3(turnEffetor, 0,0)), 1.2f);
+                isMoving = true;
+            }
+            else
+            {
+                isMoving = false;
+                //turnEffetor = 0;
+            }*/
+    }
+
+    void Drift()
+    {
+        //Vector3 move = new Vector3(0, 0, Input.GetAxis("Vertical")).normalized;
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            isMoving = false;
-            //turnEffetor = 0;
+            linearDragMultiplier = 0.01f;
+        }
+        if(Input.GetKeyUp(KeyCode.Space))
+        {
+            linearDragMultiplier = 1f;
         }
     }
 }
